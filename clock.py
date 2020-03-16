@@ -73,7 +73,7 @@ def compute_history_price():
 
 
 # decorator 設定 Scheduler 的類型和參數，例如 interval 間隔多久執行
-@sched.scheduled_job('interval', minutes=1)
+@sched.scheduled_job('interval', minutes=5)
 def timed_job():
     # 要注意不要太頻繁抓取
     print('每 5 分鐘執行一次程式工作區塊')
