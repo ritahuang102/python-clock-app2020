@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 # 當作報明牌隨機的股票 list
-good_luck_list = [1301, 1303 ,2301, 2330, 2352, 2324, 9904]
+good_luck_list = ['0050', '0056', '2317', '2301', '2891', '1301', '1303' ,'2301', '2330', '2352', '2324', '9904']
 
 # 創建一個 Scheduler 物件實例
 sched = BlockingScheduler()
@@ -60,8 +60,10 @@ def compute_history_price():
 	#將 HTML 轉成 BeautifulSoup 物件
   soup = BeautifulSoup(raw_html, 'html.parser')
   today_price = float(soup.select('body > table:nth-child(5) > tr > td:nth-child(3) > table > tr:nth-child(1) > td:nth-child(1) > table > tr:nth-child(3) > td:nth-child(1)')[0].text.replace(',',''))
-	
-  print(stock_no, '今天股價', today_price)
+
+  stock_name = soup.select('body > table:nth-child(5) > tr > td:nth-child(3) > table:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table > tbody > tr:nth-child(1) > td > table > tr > td:nth-child(1) > nobr > a')[0].text
+
+  print(stock_name, '今天股價', today_price)
   if (today_price >  sum(hi_price)/year_count):
     print('太貴了！')
   elif (today_price < sum(low_price)/year_count):
