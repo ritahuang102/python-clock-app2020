@@ -40,6 +40,7 @@ def compute_history_price():
       #print(year_price['data'][i][0])
       year_count += 1
 
+  print('*************************歷年股價法**********************************')
   print(stock_no ,'近' , year_count , '年最高最低及平均股價')
   print('昂貴價', sum(hi_price)/year_count)
   print('便宜價', sum(low_price)/year_count)
@@ -60,7 +61,7 @@ def compute_history_price():
   soup = BeautifulSoup(raw_html, 'html.parser')
   today_price = float(soup.select('body > table:nth-child(5) > tr > td:nth-child(3) > table > tr:nth-child(1) > td:nth-child(1) > table > tr:nth-child(3) > td:nth-child(1)')[0].text.replace(',',''))
 	
-  print(stock, '今天股價', today_price)
+  print(stock_no, '今天股價', today_price)
   if (today_price >  sum(hi_price)/year_count):
     print('太貴了！')
   elif (today_price < sum(low_price)/year_count):
@@ -70,7 +71,7 @@ def compute_history_price():
 
 
 # decorator 設定 Scheduler 的類型和參數，例如 interval 間隔多久執行
-@sched.scheduled_job('interval', minutes=5)
+@sched.scheduled_job('interval', minutes=1)
 def timed_job():
     # 要注意不要太頻繁抓取
     print('每 5 分鐘執行一次程式工作區塊')
