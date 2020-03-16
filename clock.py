@@ -61,7 +61,7 @@ def compute_history_price():
   soup = BeautifulSoup(raw_html, 'html.parser')
   today_price = float(soup.select('body > table:nth-child(5) > tr > td:nth-child(3) > table > tr:nth-child(1) > td:nth-child(1) > table > tr:nth-child(3) > td:nth-child(1)')[0].text.replace(',',''))
 
-  stock_name = soup.select('body > table:nth-child(5) > tr > td:nth-child(3) > table:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table > tbody > tr:nth-child(1) > td > table > tr > td:nth-child(1) > nobr > a')[0].text
+  stock_name = soup.select('body > table:nth-child(5) > tr > td:nth-child(3) > table:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table > tr:nth-child(1) > td > table > tr > td:nth-child(1) > nobr > a')[0].text
 
   print(stock_name, '今天股價', today_price)
   if (today_price >  sum(hi_price)/year_count):
